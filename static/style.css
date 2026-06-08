@@ -1,0 +1,97 @@
+/* Общие настройки */
+body {
+    font-family: "Segoe UI", Roboto, sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Сайдбар */
+.sidebar-nav {
+    position: fixed;
+    top: 80px;
+    left: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 10px 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: 500;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+    background-color: #f3f4f6;
+}
+
+/* Контейнер задач */
+.container {
+    max-width: 900px;
+    margin: 60px auto;
+    padding-left: 160px; /* чтобы контент не налезал на сайдбар */
+}
+
+/* Заголовок */
+h1 {
+    text-align: left;
+    font-size: 2.2rem;
+    color: #212529;
+    margin-bottom: 30px;
+}
+
+/* Кнопка Add task */
+.add-task-btn {
+    float: right;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.add-task-btn:hover {
+    background-color: #2563eb;
+}
+
+/* Список задач */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.task-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 14px 20px;
+    border-radius: 8px;
+}
+
+/* Кнопки Complete / Undo */
+.task-item input[type="submit"] {
+    background-color: #22c55e;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.task-item input[type="submit"]:hover {
+    background-color: #16a34a;
+}
