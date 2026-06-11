@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tag List</title>
+</head>
+<body>
+  <div class="page-layout">
+    <div class="sidebar">
+      {% block sidebar %}
+        {% include "includes/sidebar.html" %}
+      {% endblock %}
+    </div>
+
+    <div class="main-content">
+      <h1>Tag List</h1>
+
+      <div class="tag-list">
+        {% for tag in tags %}
+          {{ tag.name }}<br>
+        {% endfor %}
+      </div>
+
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="submit">
+      </form>
+    </div>
+  </div>
+</body>
+</html>
