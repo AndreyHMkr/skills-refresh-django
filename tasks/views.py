@@ -41,3 +41,21 @@ class AddTaskView(CreateView):
     fields = ["title", "deadline", "tags"]
     template_name = "add_task.html"
     success_url = reverse_lazy("tasks:task_list")
+
+
+def update_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    if request.method == "POST":
+        form = TaskForm(request.POST, instance=task)
+        if form.is_valid():
+            form.save()
+            return redirect("tasks:task_list")
+    else:
+        form = TaskForm(instance=task)
+    return render(request, "update_task.html", {"form": form})
+
+
+def delete_task(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return redirect("tasks:task_list")
