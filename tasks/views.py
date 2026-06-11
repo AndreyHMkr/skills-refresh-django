@@ -1,9 +1,8 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView
-
-from tasks.models import Task
+from tasks.forms import TaskForm, TagForm
+from tasks.models import Task, Tag
 
 
 class TaskListView(ListView):
@@ -12,8 +11,22 @@ class TaskListView(ListView):
 
 
 class TagListView(ListView):
-    model = Task
+    model = Tag
     template_name = "tag_list.html"
+    context_object_name = "tags"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = TagForm()
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = TagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("tasks:task_list")
+        else:
+            return self.get(request, *args, **kwargs)
 
 
 def toggle_task(request, pk):
