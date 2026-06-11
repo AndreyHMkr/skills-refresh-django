@@ -34,25 +34,44 @@
     <div class="task-list">
       {% for task in task_list %}
         <div class="task-item">
-          <div>
+          <div class="task-left">
             <strong>{{ task.title }}</strong>
+
             {% if task.is_done %}
-              <span style="color: green;">Done</span>
+              <span class="status done">Done</span>
             {% else %}
-              <span style="color: red;">Not done</span>
+              <span class="status not-done">Not done</span>
             {% endif %}
+
+            <div class="task-created">
+              Created: {{ task.created_at }}
+            </div>
+
+            <div class="tags">
+              {% for tag in task.tags.all %}
+                <span class="tag">{{ tag.name }}</span>
+              {% endfor %}
+            </div>
+            <div class="task-actions">
+              <a href="{% url 'tasks:update_task' task.id %}">Update</a>
+              <a href="{% url 'tasks:delete_task' task.id %}">Delete</a>
+            </div>
           </div>
-          <form action="{% url 'tasks:toggle_task' task.id %}" method="post">
-            {% csrf_token %}
-            {% if task.is_done %}
-              <input type="submit" value="Undo">
-            {% else %}
-              <input type="submit" value="Complete">
-            {% endif %}
-          </form>
+
+          <div class="task-right">
+            <form action="{% url 'tasks:toggle_task' task.id %}" method="post">
+              {% csrf_token %}
+              <input type="submit"
+                     class="{% if task.is_done %}undo-btn{% else %}complete-btn{% endif %}"
+                     value="{% if task.is_done %}Undo{% else %}Complete{% endif %}">
+            </form>
+          </div>
         </div>
+
       {% endfor %}
     </div>
+
+
   </div>
 {% endif %}
 </body>
